@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Designing &amp; Building Wonderful iOS Animations</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="author" content="Mike Rundle" />
+	<link rel="stylesheet" href="guide.css" />
+	<script src="common/common.js"></script>
+</head>
+<body>
+	<div id="wrapper">
+
+	<header>
+		<h1>Motion Design for iOS<small>Section 4</small><em>By Mike Rundle</em></h1>
+	</header>
+
+	<section>
+
+		<p>Now that we’ve explored the basics of Core Animation and using the excellent framework JNWSpringAnimation to emulate spring systems, it’s time to start coding some real examples.</p>
+
+		<h2>Replicating An iOS Alert View</h2>
+
+		<p>Recreating a familiar interface element is a great way to become familiar with animation development. To start off, let’s create our own version of the standard iOS alert view. Here’s what the built-in alert view looks like.</p>
+
+		<figure>
+			<img src="images/ios7alert.gif" alt="iOS 7 alert view" />
+		</figure>
+
+		<p>In an earlier section of this guide, I explained how important it is to be able to break down an animation into its component parts so you can actually build it. It’s not enough to just say “the alert animates onto the screen” you need to know exactly what is happening. Let’s break down this animation.</p>
+
+		<ol>
+			<li>The screen is darkened with a semi-transparent gray overlay that fades in.</li>
+			<li>The alert view starts off at 0 opacity and a larger than 1.0 scale and animates down to 100% opacity and a 1.0 scale.</li>
+			<li>When dismissed, it fades back out to 0 opacity and the scale is animated down to less than 1.0.</li>
+			<li>The dark overlay fades out and goes away.</li>
+		</ol>
+
+		<p>Before we get into the details of the code, let’s take a look at what our finished alert view will look and feel like.</p>
+
+		<figure>
+			<img src="images/alertfinal.gif" alt="Custom alert view" />
+		</figure>
+
+		<p>First, let’s setup a simple application window with a white background. This is in the application’s delegate class and the code runs once the app is finished launching. You can follow along with this code in the <strong>Alert View 1</strong> Xcode project.</p>
+
+		<pre class="prettyprint">- (BOOL)application:(UIApplication *)application
+    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+	
+    // Construct the main window for this application
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+    // All additional code in this example will go right here
+
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    return YES;
+}</pre>
+
+		<p>At this stage, we have a <code class="prettyprint">UIWindow</code> that has the right position and dimensions to fill the screen and its <code class="prettyprint">backgroundColor</code> has been set to white. If we run it right now, it just loads up a blank, white application screen into the simulator (or your phone if it’s connected.) Now let’s create our overlay, add it to the window, and turn the opacity down to 0.0 as we don’t want it showing yet.</p>
+
+		<pre class="prettyprint">
+UIView *overlayView = [[UIView alloc] initWithFrame:self.window.bounds];
+overlayView.backgroundColor = [UIColor blackColor];
+overlayView.alpha = 0.0f;
+[self.window addSubview:overlayView];</pre>
+
+		<p>This <code class="prettyprint">overlayView</code> is just a simple <code class="prettyprint">UIView</code> that fills up the entire <code class="prettyprint">bounds</code> of the main window object. That means it’ll be positioned at the top left of the window, and its width and height will match the window and cover up the entire thing. Just to show what we have so far, if I turn up the opacity on the <code class="prettyprint">overlayView</code>, here’s what it looks like.</p>
+
+		<figure>
+			<img src="images/alert1.png" />
+		</figure>
+
+		<p>Now let’s work on our alert view which, for ease of implementation in this demo, will just be a simple image and not a fully-coded view with labels and buttons. Let’s start with creating the view.</p>
+
+		<pre class="prettyprint">CGFloat alertDimension = 250;
+CGRect alertViewFrame = CGRectMake(
+    self.window.bounds.size.width/2 - alertDimension/2,
+    self.window.bounds.size.height/2 - alertDimension/2,
+    alertDimension, alertDimension);
+UIView *alertView = [[UIView alloc] initWithFrame:alertViewFrame];</pre>
+
+		<p>First, we need to create a <code class="prettyprint">UIView</code> object that will act as our dummy alert lightbox and get it positioned right in the center of the screen. This is accomplished by dividing the full window’s width and height by 2 and subtracting half the alert’s width and height. I like to set an object’s frame to where its final position will be once it’s done being animated and then adjust it larger or in a different position by manipulating its <code class="prettyprint">transform</code> property. That way, when it comes to adding animation, I’m essentially <em>removing</em> manipulations that were done to the <code class="prettyprint">transform</code> vs. having to re-calculate its <code class="prettyprint">CGRect</code> frame and do math. This is the same reason why I like to animate a view’s <code>transform.scale</code> in nice, simple increments vs. animating its entire frame and having to figure out what the position and dimensions are at a pixel level if I want it, say, 1.5&times; as large. That’s a pain. Staying simple is where it’s at.</p>
+
+		<p>Time to set some of its key properties since at this point it’s totally blank.</p>
+
+		<pre class="prettyprint">alertView.backgroundColor = [UIColor colorWithPatternImage:
+    [UIImage imageNamed:@"alert_box"]];
+alertView.alpha = 0.0f;
+alertView.transform = CGAffineTransformMakeScale(1.2, 1.2);
+alertView.layer.cornerRadius = 10;</pre>
+
+		<p>In this code we’re doing 4 things:</p>
+
+		<ol>
+			<li>Setting the <code class="prettyprint">backgroundColor</code> property to an image that I created to look like a nifty, simple alert view lightbox.</li>
+			<li>Setting the <code class="prettyprint">alpha</code> down to 0 so this alert isn’t visible immediately until we want to animate it in.</li>
+			<li>Setting its <code class="prettyprint">transform</code> property to make the scale larger than normal with the <code class="prettyprint">CGAffineTransformMakeScale()</code> function for manipulating just the scale value in the transform matrix.</li>
+			<li>Rounding the corners by setting the view’s layer’s <code class="prettyprint">cornerRadius</code> property.</li>
+		</ol>
+
+		<p>Let’s finish the configuration of our alert view by giving it a slight drop shadow.</p>
+
+		<pre class="prettyprint">alertView.layer.shadowColor = [UIColor blackColor].CGColor;
+alertView.layer.shadowOffset = CGSizeMake(0, 5);
+alertView.layer.shadowOpacity = 0.3f;
+alertView.layer.shadowRadius = 10.0f;
+[self.window addSubview:alertView];</pre>
+
+		<p>If I turn the alpha value back up to 1.0 and remove the scaled-up transform and take a screenshot, here’s what it looks like so far.</p>
+
+		<figure>
+			<img src="images/alert2.png" />
+		</figure>
+
+		<p>Time to add some animations. For the display of the alert, as I mentioned previously, we want the overlay to go from completely transparent (invisible) to semi-transparent. We also want to apply 2 animations to the actual alert: animate the opacity from 0.0 to 1.0 and animate the scale from larger-than-1.0 scale down to 1.0 scale. This is what the iOS 7 alert view does so we’re going to mimic it.</p>
+
+		<p>Let’s first tackle the 2 opacity animations (the overlay and the alert view) and because opacity animations typically don’t need any advanced spring motions, let’s use some simple block-based <code class="prettyprint">UIView</code> animations.</p>
+
+		<pre class="prettyprint">// Fade in the grey overlay and alert view
+[UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut
+    animations:^{
+    overlayView.alpha = 0.3f;
+    alertView.alpha = 1.0f;
+} completion:NULL];</pre>
+
+		<p>We’re animating both the overlay opacity and the alert view opacity at the same time, in the same animation block. This is because I want both the overlay and the alert to appear to the user with the same animation easing and in the same amount of time, so why not just animate them together? I tuned the duration to a little less than a third of a second. I arrived at that number by playing with the timing a bit, running the animation, and choosing what felt right for this type of animation. When displaying an important message to the user, like in an alert, it’s a good idea to use a softer animation duration so that the actual transition feels more important. Instead of it showing up very quickly, a slower timing implies that the message has more weight and momentum to it and the user should pay attention.</p>
+
+		<p>Now it’s time to animate the scale of the alert view. This I <em>do</em> want to use a more advanced spring motion just to make its entrance a little more interesting compared to a simple easing animation like in the block-based example above. In the standard iOS alert view, Apple doesn’t bounce the alert in but rather uses a slow, decaying animation to gradually arrive at the final value. We’ll be doing the same here by matching up our <code class="prettyprint">damping</code> and <code class="prettyprint">stiffness</code> properties on the spring animation.</p>
+
+		<pre class="prettyprint">// Scale-animate in the alert view
+JNWSpringAnimation *scale = [JNWSpringAnimation animationWithKeyPath:@"transform.scale"];
+scale.damping = 14;
+scale.stiffness = 14;
+scale.mass = 1;
+scale.fromValue = @(1.2);
+scale.toValue = @(1.0);
+
+[alertView.layer addAnimation:scale forKey:scale.keyPath];
+alertView.transform = CGAffineTransformMakeScale(1.0, 1.0);</pre>
+
+		<p>The key path of this animation is <code class="prettyprint">"transform.scale"</code> because that’s the property on the layer we want to manipulate. Remember when we first created this <code class="prettyprint">UIView</code> and set the transform property to <code class="prettyprint">CGAffineTransformMakeScale(1.2, 1.2)</code>? Well that’s now our <code class="prettyprint">fromValue</code> that we’re starting from, aka, the current scale size, and we’re animating it back down to 1.0 scale which is the normal size and dimensions.</p>
+
+		<p>Here’s what the animation looks like at this point.</p>
+
+		<figure>
+			<img src="images/alert4.gif" />
+		</figure>
+
+		<p>Not bad! The alert is correctly centered vertically and horizontally within the window and animates the way I want. Now let’s work on the animation for when it is dismissed.</p>
+
+		<p>Just like when we initially displayed the alert and made sure it didn’t appear too quickly, when an alert is dismissed we want to think a little bit about what the timing should feel like. I don’t know about you, but when I dismiss an alert, I want to immediately get back to what I was doing before being interrupted, so with that in mind, I always like to remove an alert from the screen <strong>faster</strong> than it appeared. There’s no reason to have the timing be symmetrical on either side of an animation like this if it makes more sense for the user to adjust the animation and timing specifically for the interaction.</p>
+
+		<pre class="prettyprint">// Fade out the grey overlay and alert view
+[UIView animateWithDuration:.15 delay:0 options:UIViewAnimationOptionCurveEaseInOut
+    animations:^{
+    overlayView.alpha = 0.0f;
+    alertView.alpha = 0.0f;
+} completion:NULL];</pre>
+
+		<p>Since we’re reversing our initial animation, we need to now animate the opacity back down to 0 for both the overlay and the alert view. Again, since I want these two items to be animated together with the same timing, I just put them into the same block-based animation. Note that the timing on this fade out animation is <em>half as long</em> as the initial fade in animation. We want this alert to feel snappy when it leaves the screen, and making the duration shorter is how we can accomplish that.</p>
+
+		<p>Next we need to scale the alert even smaller while it’s being faded out to 0 opacity.</p>
+
+		<pre class="prettyprint">// Scale-animate out the alert view
+JNWSpringAnimation *scaleOut = [JNWSpringAnimation
+    animationWithKeyPath:@"transform.scale"];
+scaleOut.damping = 11;
+scaleOut.stiffness = 11;
+scaleOut.mass = 1;
+scaleOut.fromValue = @(1.0);
+scaleOut.toValue = @(0.7);
+
+[alertView.layer addAnimation:scaleOut forKey:scaleOut.keyPath];
+alertView.transform = CGAffineTransformMakeScale(0.7, 0.7);</pre>
+	
+		<p>The built-in iOS alert view scales the alert down a bit as it fades out, so we’re doing the same thing here. The specific scale value of 0.7 was just something I arrived at after looking at the built-in alert view and also what looked nice.</p>
+
+		<p>Here’s the full animation:</p>
+
+		<figure>
+			<img src="images/alertfinal.gif" alt="iOS 7 alert view" />
+		</figure>
+
+		<h2>Building Some Fancier Alert Views</h2>
+
+		<p>Now that we’ve mostly replicated a stock-standard iOS 7 alert view, let’s have some fun and build some custom alert views with different types of motions. Here’s an example of an alert view that has a position and scale animation and appears from the bottom of the screen before animating back down off the screen as it’s dismissed. You can follow along with this example in the <strong>Alert View 2</strong> Xcode project.</p>
+
+		<figure>
+			<img src="images/alertfrombottom.gif" alt="Different type of alert view" />
+		</figure>
+
+		<p>To accomplish this animation, the <code class="prettyprint">UIView</code> holding the alert has nearly the same setup as our previous example, but in this one we need to update its <code class="prettyprint">transform</code> property to have both a <code class="prettyprint">translation</code> and <code class="prettyprint">scale</code> change.</p>
+
+		<pre class="prettyprint">alertView.transform = CGAffineTransformMakeScale(.25, .25);
+alertView.transform = CGAffineTransformTranslate(alertView.transform, 0, 600);</pre>
+
+		<p>This sets the <code class="prettyprint">transform</code> to one with an updated <code class="prettyprint">scale</code> down to .25 in both the X and Y dimensions, and then updates it one more time with a <code class="prettyprint">translation</code> change pushing it off the bottom of the screen. You could also do this which would accomplish the same thing.</p>
+
+		<pre class="prettyprint">CGAffineTransform viewTransform = CGAffineTransformConcat(
+    CGAffineTransformMakeScale(.25, .25), CGAffineTransformMakeTranslation(0, 600));
+alertView.transform = viewTransform;</pre>
+
+		<p>Now that the <code class="prettyprint">UIView</code> is setup to be scaled small and also moved off the bottom of the screen prior to the animation starting, we can get down to business with our 2 animations. We’ll be scaling the alert back up to 1.0 size and also translating its position back up to where it started, in the center of the screen. We’ll also be fading out the overlay and fading in the alert at the same rate.</p>
+
+		<pre class="prettyprint">// Fade the overlay and alert view together
+UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut
+    animations:^{
+    overlayView.alpha = 0.2f;
+    alertView.alpha = 1.0f;
+} completion:NULL];
+
+// Animate the alert’s scale from .25 up to 1.0
+JNWSpringAnimation *scale =
+    [JNWSpringAnimation animationWithKeyPath:@"transform.scale"];
+scale.damping = 12;
+scale.stiffness = 12;
+scale.mass = 1;
+scale.fromValue = @(.25);
+scale.toValue = @(1.0);
+
+[alertView.layer addAnimation:scale forKey:scale.keyPath];
+alertView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
+
+// Animate the position from the starting Y position of 600 back up to 0
+// which puts it back at the original position
+JNWSpringAnimation *translate = [JNWSpringAnimation
+    animationWithKeyPath:@"transform.translation.y"];
+translate.damping = 15;
+translate.stiffness = 15;
+translate.mass = 1;
+translate.fromValue = @(600);
+translate.toValue = @(0);
+
+[alertView.layer addAnimation:translate forKey:translate.keyPath];
+alertView.transform = CGAffineTransformTranslate(alertView.transform, 0, 0);</pre>
+
+		<p>If you have a sharp eye you’ll notice that the spring properties for these two animations are very similar. They both have <code class="prettyprint">stiffness</code> matched up with their <code class="prettyprint">damping</code> which means it’ll be an exponential decay type of motion with no bounciness. However, those values are lower on the <code class="prettyprint">scale</code> animation than the <code class="prettyprint">translation</code> animation which means the <code class="prettyprint">scale</code> animation will take place in slightly slower time. This is because I want both the animations to finish their motion at approximately the same time, and since the <code class="prettyprint">translation</code> animation is moving through more values than the <code class="prettyprint">scale</code> animation, it needs to move a little quicker to match the relative speed of the <code class="prettyprint">scale</code> animation. This just took a little eyeballing and tweaking to figure out, but it definitely looks odd if one of the animations finishes up before the other.</p>
+
+		<p>For the reverse animation, the alert scales back down and jumps off the bottom of the screen. Just like with the other example, I want the alert removal to have a quicker motion than when it’s first displayed to get out of the user’s way.</p>
+
+		<pre class="prettyprint">// Fade the overlay and alert view together
+[UIView animateWithDuration:.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut
+    animations:^{
+    overlayView.alpha = 0.0f;
+    alertView.alpha = 0.0f;
+} completion:NULL];
+
+// Animate the alert’s scale from 1.0 down to .5
+JNWSpringAnimation *scale =
+    [JNWSpringAnimation animationWithKeyPath:@"transform.scale"];
+scale.damping = 17;
+scale.stiffness = 17;
+scale.mass = 1;
+scale.fromValue = @(1.0);
+scale.toValue = @(0.5);
+
+[alertView.layer addAnimation:scale forKey:scale.keyPath];
+alertView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.5, 0.5);
+
+// Animate the position from 0 (original position) back off the screen
+JNWSpringAnimation *translate = [JNWSpringAnimation
+    animationWithKeyPath:@"transform.translation.y"];
+translate.damping = 4;
+translate.stiffness = 4;
+translate.mass = 1;
+translate.fromValue = @(0);
+translate.toValue = @(600);
+
+[alertView.layer addAnimation:translate forKey:translate.keyPath];
+alertView.transform = CGAffineTransformTranslate(alertView.transform, 0, 600);</pre>
+
+		<p>The animation speeds as the alert is dismissed are very different from one another: the <code class="prettyprint">translation</code> animation is much slower than the <code class="prettyprint">scale</code> animation. The reason why is with the <code class="prettyprint">translation</code> animation moving slower than the <code class="prettyprint">scale</code> animation, you get to see <em>more</em> of the scale animation before the alert falls off the bottom of the screen. I thought this was a nice effect visually as it reinforces the alert being dismissed and going away.</p>
+
+		<p>If the we quicken the <code class="prettyprint">translation</code> animation up to the same <code class="prettyprint">damping</code> and <code class="prettyprint">stiffness</code> values of the <code class="prettyprint">scale</code> animation, here’s what it looks like.</p>
+
+		<figure>
+			<img src="images/alert2fast.gif" />
+		</figure>
+
+		<p>Compared to the slowed down transition...</p>
+
+		<figure>
+			<img src="images/alertfrombottom.gif" alt="Different type of alert view" />
+		</figure>
+
+		<p>It may be tough to see in GIF form so edit the <strong>Alert View 2</strong> Xcode project and play around with some of the values yourself to get a sense of what feels right.</p>
+
+		<p>Now let’s create a different type of motion for our alert view, one where it emerges from the center of the screen with a bounce animation to get the user’s attention. You can follow along in the <strong>Alert View 3</strong> Xcode project. Here’s what it’ll look like.</p>
+
+		<figure>
+			<img src="images/alert3center.gif" />
+		</figure>
+
+		<p>This is actually a simpler animation than the previous example because we’re only animating one property of the alert’s <code class="prettyprint">transform</code>, its <code class="prettyprint">scale</code>. To set up our alert view, we set its initial <code class="prettyprint">scale</code> to 0.</p>
+
+		<pre class="prettyprint">alertView.transform = CGAffineTransformMakeScale(0, 0);</pre>
+
+		<p>Just like before, we want to fade animate the overlay and the alert, but this time we’ll be animating the <code class="prettyprint">scale</code> of the alert view to bounce out from the screen.</p>
+
+		<pre class="prettyprint">JNWSpringAnimation *scale = [JNWSpringAnimation
+    animationWithKeyPath:@"transform.scale"];
+scale.damping = 32;
+scale.stiffness = 450;
+scale.mass = 2.4;
+scale.fromValue = @(0);
+scale.toValue = @(1.0);
+
+[alertView.layer addAnimation:scale forKey:scale.keyPath];
+alertView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);</pre>
+
+		<p>These <code class="prettyprint">damping</code>, <code class="prettyprint">stiffness</code> and <code class="prettyprint">mass</code> properties of the spring are pretty different from the ones we’ve been using to create gradually-diminishing motions towards a final value. These values were tweaked using the JNWSpringAnimation Mac app until they felt they had the right bounce to them, and not too fast or overly energetic.</p>
+
+		<p>Feeling comfortable with JNWSpringAnimation and using natural motions to build animated interfaces? Great! it’s time to kick it into overdrive and build a couple of the animated examples shown in the first section of this guide.</p>
+
+		<a class="next-section" href="guide-5.html">CONTINUE</a>
+
+	</section>
+
+	</div>
+</body>
+</html>

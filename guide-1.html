@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Designing &amp; Building Wonderful iOS Animations</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="author" content="Mike Rundle" />
+	<link rel="stylesheet" href="guide.css" />
+	<script src="common/common.js"></script>
+</head>
+<body>
+	<div id="wrapper">
+
+	<header>
+		<h1>Motion Design for iOS<em>By Mike Rundle</em></h1>
+	</header>
+
+	<section>
+
+		<p>In June 2013, Apple unveiled iOS 7 and its radical departure from the previous 6 releases put designers back on their heels. Gone was the skeuomorphic realism that was previously the hallmark of beautiful iOS design and in was a flatter, sleeker, more “digitally authentic” aesthetic. A big side effect of this move to flat design was that the execution of a design in Photoshop (or in any designer’s tool of choice) was now a lot simpler, took a lot less time, and was no longer a differentiator. Creating an app interface to have beautifully realistic gradients, shadows and highlights is a painstaking effort. Creating an app interface that is essentially devoid of gradients and shadows and is primarily made up of large swaths of the same color is dramatically simpler.</p>
+
+		<p>Flat design made it much harder for apps to stand out, visually, from one another. </p>
+		
+		<p>Now, in this post-iOS 7 world, a lot of iOS apps now share a similar visual design aesthetic. Similar colors, similar typography, similar whitespace. The lack of gradients, shadows and other visual ornamentation in apps designed for iOS 7 has flattened the playing field (so to speak!) and now app designers and developers have realized that they have to differentiate their creations from their competitors by using <strong>motion</strong> and <strong>animation.</strong></p>
+
+		<p>What does that really mean? There were animations in apps before iOS 7, so what has changed? What’s changed is how important and significant motion design now is when crafting your app’s user experience. What used to be an afterthought (after you design the fully-skeuomorphic and rendered faux-3D interface) is now front-and-center and a key facet of the overall way that your customers experience your app. Animations are no longer tacked on at the end, they’re now designed and thought of throughout the entire design process.</p>
+		
+		<p>So you’re ready to add some delightful animations to your app, where do you begin? Where and how do you add animation? What types of animations are compelling and natural and what animations are boring and commonplace?</p>
+
+		<p>Let’s dive in!</p>
+
+		<h2>The Origins of Fluid, Realistic Animation</h2>
+
+		<p>In 1981, longtime Disney animators <a href="http://en.wikipedia.org/wiki/Ollie_Johnston">Ollie Johnston</a> and <a href="http://en.wikipedia.org/wiki/Frank_Thomas_%28animator%29">Frank Thomas</a> (members of <a href="http://en.wikipedia.org/wiki/Disney%27s_Nine_Old_Men">Disney’s Nine Old Men</a>, the original Disney animation team from back in the 1920s and 1930s) wrote a book called <a href="http://en.wikipedia.org/wiki/The_Illusion_of_Life"><em>Disney Animation: The Illusion of Life</em></a> which outlined the fundamentals of character animation that they pioneered at Disney during the course of their work on early cartoons.</p>
+
+		<p>These <a href="http://en.wikipedia.org/wiki/12_basic_principles_of_animation">12 Basic Principles of Animation</a> were described in detail in <em>The Illusion of Life</em> and the book is now widely considered to be “the Bible of animation” by artists and animators working in the field. Although these principles were developed by animators working on hand-drawn cartoons nearly 80 years ago, they are almost completely applicable today.</p>
+		
+		<figure>
+			<img src="images/illusion.jpg" />
+			<figcaption>A reprinted edition of the famous book inverted the title and printed “The Illusion of Life” first instead of “Disney Animation.”</figcaption>
+		</figure>
+
+		<p>The basic principles are <strong>Squash and Stretch, Anticipation, Staging, Straight Ahead &amp; Pose-to-Pose, Follow-Through and Overlapping Action, Slow In and Slow Out, Arcs, Secondary Action, Timing, Exaggeration, Solid Drawing</strong> and <strong>Appeal.</strong></p>
+
+		<p>Designer <a href="http://www.centolodigiani.com/">Cento Lodigiani</a> created a wonderful video showing these 12 principles if they were to be applied to a simple object like a charismatic and bouncy cube. He also turned the examples into a <a href="http://the12principles.tumblr.com/">series of animated GIFs</a> as well.</p>
+
+		<iframe style="margin: 0 -100px 1.8em -100px;" src="http://player.vimeo.com/video/93206523" width="900" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+		<p>These original principles of animated motion created the framework through which animation has been crafted since the 1920s and 1930s. Ollie Johnston and Frank Thomas were the pioneers of a new era of cartoon animation, so how can we apply these basic principles of animation to designing modern software interactions? Before getting into those details, let’s first talk about <em>why</em> animations should be used in your product and <em>how</em> to think about animations in general.</p>
+
+		<h2>Transition, Focus &amp; Delight</h2>
+
+		<p>I’ve been thinking about, designing and building animations for iOS apps since the SDK was first announced. After all this time, and all these apps, I’ve realized that there are 3 key reasons why I’ll typically imagine, design and build an animation for an iOS app (or actually any digital product for that matter):</p>
+
+		<ol>
+			<li><strong>Transition:</strong> To accentuate a smooth movement between two visual states so that the user can become acclimated to the new screen and not just shoved into it. A smooth transition like this eases the mental burden of an unfamiliar interface.</li>
+			<li><strong>Focus:</strong> To direct the user’s attention to a particular part of the interface that’s important or recently updated, especially an element that needs immediate user action.</li>
+			<li><strong>Delight:</strong> To make an otherwise commonplace interaction more appealing and interesting through the use of whimsy or unexpected motion.</li>
+		</ol>
+
+		<p>Let’s walk through some examples of animations and dissect the reasoning for why they exist and what their purposes are using these 3 animation categories.</p>
+
+		<figure>
+			<img src="images/calendar.gif" />
+			<figcaption>iOS 7 Calendar app animations, from <a href="http://www.beyondkinetic.com/box/2014/2/28/ios-calendar">BeyondKinetic.</a></figcaption>
+		</figure>
+
+		<p>Apple’s Calendar app for iOS has been totally re-imagined for iOS 7. The animation between viewing a year and a single month is a great example of a transition that guides a user between two visual states. Because the transition isn’t just a simple navigation controller push, but an animated zoom into a deeper detail level, a user really gets the sense that they are diving deeper into the data.</p>
+
+		<figure>
+			<img src="images/call.gif" />
+			<figcaption>iOS 7.1 call screen and power off animations, from <a href="http://www.beyondkinetic.com/ios71-update/">BeyondKinetic.</a></figcaption>
+		</figure>
+
+		<p>The call screen animations starting in iOS 7.1 have been thoroughly refined and now have a more consistent design than before. When accepting a call, the green Accept button now rotates and transitions to a red color so it can become the hang up button. A similar transition happens after you tap the green call button when initiating a call. The lock screen power off slider is much more understandable now and all parts of the screen (except the power off button you’re sliding) fades out to indicate what the next state of the interface will be if you continue sliding it &mdash; a turned off phone.</p>
+
+		<figure>
+			<img src="images/speedometer.gif" />
+			<figcaption>Animation by <a href="https://dribbble.com/shots/1436337-Speedcam-app-animation">Jakub Antalík.</a></figcaption>
+		</figure>
+
+		<p>The interface shown above uses a build-in effect to transition from a blank state to a screen filled with information. By animating in each element separately, it forces the user to pay attention to one element at a time as it is animated onto the screen. This step-by-step type of animated build-in lets a designer fine-tune how a user’s visual focus is spent at each millisecond of usage. It’s also more visually appealing than simply displaying this screen without any animation, or by animating in the entire screen at once. A negative side-effect of this type of animation is that it takes longer to present the interface and its corresponding information to the user. This can get annoying, especially if it’s happening over and over. Animating timing and perceived slowness will be discussed later on in this guide.</p>
+
+		<figure>
+			<img class="full" src="images/map.gif" />
+			<figcaption>Animation by <a href="https://dribbble.com/brdrck">Jeff Broderick.</a></figcaption>
+		</figure>
+
+		<p>This is a wonderful example of how an animated transition can orient the user and make them understand the larger mental model behind an app. Keeping the icon stationary while animating out the main screen and animating in the map makes the map icon seem like a visual pivot point between two central panels. When the user taps on the map icon, and the map is brought forward, the previous interface has been scaled back and is still visible. The user won’t feel like they are lost in the application when moving around and figuring out how certain features work.</p>
+
+		<figure>
+			<img class="full" src="images/paper.gif" />
+			<figcaption>Various animations from Facebook Paper, animations from <a href="http://capptivate.co/?s=Paper">CAPPTIVATE.</a></figcaption>
+		</figure>
+
+		<p>All transitions and newly-presented information in Facebook Paper are animated using various 2D and 3D effects. In the first panel, when the globe icon is tapped, the Notifications sheet slides out from underneath the icon giving users the impression that it’s always just tucked up underneath that globe, waiting to be displayed. Also, by eminating from the icon, it reinforces a particular mental model to the user indicating that that exact screen can always be accessed by the globe no matter where they are in the application.</p>
+
+		<p>In the third panel, when you slide a piece of content up from the bottom scrollview to take over the full screen, it slides on top of what’s currently presented to remind the user they can get back to where they were with just a simple flick back down. If the whole screen faded out and then the article detail view faded in, users would be left without any sense of where they were contextually within the app, so Paper’s various transitions are always used to anchor the navigational flows in a user’s mind.</p>
+
+		<p>Paper uses the wonderful animation framework Pop that Facebook has released as an open source project for all developers to use. We’ll be diving in deep into Pop later on.</p>
+
+		<figure>
+			<img class="full" src="images/iwatch.gif" />
+			<figcaption>Animation by <a href="https://dribbble.com/bogner">Thomas Bogner</a></figcaption>
+		</figure>
+
+		<p>In this concept animation for an Apple wristband, you can see that the transition between each screen is fluid and objects move out of the way before new objects appear on the screen. Each object moves as if it’s being tugged by the previous object that was in motion. Because the display is so small, and in a landscape orientation, it’s important to build a user’s mental model of the application using motion. Here you can see that the music controls are to the left of the clock and below the music controls is the functionality to change the song. To the right of the clock are a list of apps. So even without any sort of navigational clues left on the screen (like a back button), the transitional animations give you a sense of the overall information architecture of the product and its interface.</p>
+
+		<figure>
+			<img class="full" src="images/menu.gif" />
+			<figcaption>Animation by <a href="https://dribbble.com/bwaddington">Brian Waddington</a></figcaption>
+		</figure>
+
+		<p>Just like with the watch example shown above, this is another animation used to visually explain the overall structure and architecture of an application’s data hierarchy. The animation starts out with a simple center-aligned text menu, and then when My Files is tapped on, the folder icon expands and opens to reveal those files. The user gets a sense that the menu is just behind the list of files and they can get back to that list at any time by tapping the menu button at the bottom right. The menu button, when tapped, scales the entire list of files down into that initial folder icon and then displays the menu again.</p>
+
+		<figure>
+			<img class="full" src="images/music.gif" />
+			<figcaption>Animation by <a href="https://dribbble.com/antalik">Jakub Antalík</a></figcaption>
+		</figure>
+
+		<p>This is another really fun animation designed by Jakub Antalík who also created the speedometer animation shown previously. Each screen uses a variety of build-in effects to stagger the display of each visual element. The way that the song list animates in is a really delightful departure from the typical way that screens animate in using a simple iOS navigation stack push. The key difference in this animation is that the screen isn’t moving all at one time, each individual element on the screen is doing the moving. To create an effect like this, each element’s starting time needs to be slightly staggered from the previous element, like they’re all being tugged in a row. This type of staggered effect will be shown as a coded example later in this guide.</p>
+
+		<figure>
+			<img class="full" src="images/skull.gif" />
+			<figcaption>Animation by <a href="https://dribbble.com/Creativedash">Creativedash</a></figcaption>
+		</figure>
+
+		<p>This pull-to-refresh skull animation is an excellent example of introducing some whimsy and interest to an interface element that could easily be overlooked and built very simply (and cheaply!) without any animation, or without the complexity and style of animation present here. There are a few things happening during the pull gesture, first, the elements that make up the skull illustration are moving around to make it appear as if the skull is rotating downwards. Next, there are two animated figures that appear as it’s pulled down that were not visible in the default state of the interface. And, finally, those animated figures aren’t just simply being shown as the user pulls, but parts of those illustrations are rotating and moving during the gesture as well. This is a very complex animation with a number of different elements, but you can imagine that a user might pull the interface down over and over just because it’s so much fun to watch. It’s something that will make them remember this app over others, and that’s so important when you’re trying to stand out on a user’s homescreen.</p>
+
+		<p>If you’re looking for great examples of app animations that others have created, I highly recommend browsing <a href="http://capptivate.co/">CAPPTIVATE.co</a> and the “animation” tag on <a href="https://dribbble.com/search?q=animation">Dribbble.</a></p>
+
+		<p>Looking at animations and discussing why they’re great is fine and dandy but it doesn’t get us any closer to being able to break down exactly what they’re doing so we can create amazing ones ourselves. Let’s continue to the next section of this guide to learn about the mechanics and properties of animation.</p>
+
+		<a class="next-section" href="guide-2.html">CONTINUE</a>
+
+	</section>
+
+	</div>
+</body>
+</html>

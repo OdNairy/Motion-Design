@@ -1,0 +1,485 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DFEE126919987D0800615011 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEE126819987D0800615011 /* Foundation.framework */; };
+		DFEE126B19987D0800615011 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEE126A19987D0800615011 /* CoreGraphics.framework */; };
+		DFEE126D19987D0800615011 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEE126C19987D0800615011 /* UIKit.framework */; };
+		DFEE127319987D0800615011 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DFEE127119987D0800615011 /* InfoPlist.strings */; };
+		DFEE127519987D0800615011 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DFEE127419987D0800615011 /* main.m */; };
+		DFEE127919987D0800615011 /* DTCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DFEE127819987D0800615011 /* DTCAppDelegate.m */; };
+		DFEE127B19987D0800615011 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFEE127A19987D0800615011 /* Images.xcassets */; };
+		DFEE128219987D0800615011 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEE128119987D0800615011 /* XCTest.framework */; };
+		DFEE128319987D0800615011 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEE126819987D0800615011 /* Foundation.framework */; };
+		DFEE128419987D0800615011 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEE126C19987D0800615011 /* UIKit.framework */; };
+		DFEE128C19987D0800615011 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DFEE128A19987D0800615011 /* InfoPlist.strings */; };
+		DFEE128E19987D0800615011 /* Bouncy_testTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFEE128D19987D0800615011 /* Bouncy_testTests.m */; };
+		DFEE129B19987D3600615011 /* JNWSpringAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = DFEE129819987D3600615011 /* JNWSpringAnimation.m */; };
+		DFEE129C19987D3600615011 /* NSValue+JNWAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DFEE129A19987D3600615011 /* NSValue+JNWAdditions.m */; };
+		DFEE129F19987D4900615011 /* DTCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFEE129E19987D4900615011 /* DTCViewController.m */; };
+		DFEE12A219987E5A00615011 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = DFEE12A119987E5A00615011 /* UIColor+Hex.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DFEE128519987D0800615011 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DFEE125D19987D0800615011 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DFEE126419987D0800615011;
+			remoteInfo = "Bouncy test";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DFEE126519987D0800615011 /* Bouncy test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bouncy test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFEE126819987D0800615011 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DFEE126A19987D0800615011 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DFEE126C19987D0800615011 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DFEE127019987D0800615011 /* Bouncy test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bouncy test-Info.plist"; sourceTree = "<group>"; };
+		DFEE127219987D0800615011 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DFEE127419987D0800615011 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DFEE127619987D0800615011 /* Bouncy test-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bouncy test-Prefix.pch"; sourceTree = "<group>"; };
+		DFEE127719987D0800615011 /* DTCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTCAppDelegate.h; sourceTree = "<group>"; };
+		DFEE127819987D0800615011 /* DTCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DTCAppDelegate.m; sourceTree = "<group>"; };
+		DFEE127A19987D0800615011 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DFEE128019987D0800615011 /* Bouncy testTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bouncy testTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFEE128119987D0800615011 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		DFEE128919987D0800615011 /* Bouncy testTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bouncy testTests-Info.plist"; sourceTree = "<group>"; };
+		DFEE128B19987D0800615011 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DFEE128D19987D0800615011 /* Bouncy_testTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bouncy_testTests.m; sourceTree = "<group>"; };
+		DFEE129719987D3600615011 /* JNWSpringAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNWSpringAnimation.h; sourceTree = "<group>"; };
+		DFEE129819987D3600615011 /* JNWSpringAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNWSpringAnimation.m; sourceTree = "<group>"; };
+		DFEE129919987D3600615011 /* NSValue+JNWAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+JNWAdditions.h"; sourceTree = "<group>"; };
+		DFEE129A19987D3600615011 /* NSValue+JNWAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+JNWAdditions.m"; sourceTree = "<group>"; };
+		DFEE129D19987D4900615011 /* DTCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCViewController.h; sourceTree = "<group>"; };
+		DFEE129E19987D4900615011 /* DTCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTCViewController.m; sourceTree = "<group>"; };
+		DFEE12A019987E5A00615011 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
+		DFEE12A119987E5A00615011 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DFEE126219987D0800615011 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFEE126B19987D0800615011 /* CoreGraphics.framework in Frameworks */,
+				DFEE126D19987D0800615011 /* UIKit.framework in Frameworks */,
+				DFEE126919987D0800615011 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFEE127D19987D0800615011 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFEE128219987D0800615011 /* XCTest.framework in Frameworks */,
+				DFEE128419987D0800615011 /* UIKit.framework in Frameworks */,
+				DFEE128319987D0800615011 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DFEE125C19987D0800615011 = {
+			isa = PBXGroup;
+			children = (
+				DFEE126E19987D0800615011 /* Bouncy test */,
+				DFEE128719987D0800615011 /* Bouncy testTests */,
+				DFEE126719987D0800615011 /* Frameworks */,
+				DFEE126619987D0800615011 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DFEE126619987D0800615011 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DFEE126519987D0800615011 /* Bouncy test.app */,
+				DFEE128019987D0800615011 /* Bouncy testTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DFEE126719987D0800615011 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DFEE126819987D0800615011 /* Foundation.framework */,
+				DFEE126A19987D0800615011 /* CoreGraphics.framework */,
+				DFEE126C19987D0800615011 /* UIKit.framework */,
+				DFEE128119987D0800615011 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DFEE126E19987D0800615011 /* Bouncy test */ = {
+			isa = PBXGroup;
+			children = (
+				DFEE12A019987E5A00615011 /* UIColor+Hex.h */,
+				DFEE12A119987E5A00615011 /* UIColor+Hex.m */,
+				DFEE129719987D3600615011 /* JNWSpringAnimation.h */,
+				DFEE129819987D3600615011 /* JNWSpringAnimation.m */,
+				DFEE129919987D3600615011 /* NSValue+JNWAdditions.h */,
+				DFEE129A19987D3600615011 /* NSValue+JNWAdditions.m */,
+				DFEE127719987D0800615011 /* DTCAppDelegate.h */,
+				DFEE127819987D0800615011 /* DTCAppDelegate.m */,
+				DFEE127A19987D0800615011 /* Images.xcassets */,
+				DFEE126F19987D0800615011 /* Supporting Files */,
+				DFEE129D19987D4900615011 /* DTCViewController.h */,
+				DFEE129E19987D4900615011 /* DTCViewController.m */,
+			);
+			path = "Bouncy test";
+			sourceTree = "<group>";
+		};
+		DFEE126F19987D0800615011 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DFEE127019987D0800615011 /* Bouncy test-Info.plist */,
+				DFEE127119987D0800615011 /* InfoPlist.strings */,
+				DFEE127419987D0800615011 /* main.m */,
+				DFEE127619987D0800615011 /* Bouncy test-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DFEE128719987D0800615011 /* Bouncy testTests */ = {
+			isa = PBXGroup;
+			children = (
+				DFEE128D19987D0800615011 /* Bouncy_testTests.m */,
+				DFEE128819987D0800615011 /* Supporting Files */,
+			);
+			path = "Bouncy testTests";
+			sourceTree = "<group>";
+		};
+		DFEE128819987D0800615011 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DFEE128919987D0800615011 /* Bouncy testTests-Info.plist */,
+				DFEE128A19987D0800615011 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DFEE126419987D0800615011 /* Bouncy test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DFEE129119987D0800615011 /* Build configuration list for PBXNativeTarget "Bouncy test" */;
+			buildPhases = (
+				DFEE126119987D0800615011 /* Sources */,
+				DFEE126219987D0800615011 /* Frameworks */,
+				DFEE126319987D0800615011 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Bouncy test";
+			productName = "Bouncy test";
+			productReference = DFEE126519987D0800615011 /* Bouncy test.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DFEE127F19987D0800615011 /* Bouncy testTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DFEE129419987D0800615011 /* Build configuration list for PBXNativeTarget "Bouncy testTests" */;
+			buildPhases = (
+				DFEE127C19987D0800615011 /* Sources */,
+				DFEE127D19987D0800615011 /* Frameworks */,
+				DFEE127E19987D0800615011 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DFEE128619987D0800615011 /* PBXTargetDependency */,
+			);
+			name = "Bouncy testTests";
+			productName = "Bouncy testTests";
+			productReference = DFEE128019987D0800615011 /* Bouncy testTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DFEE125D19987D0800615011 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = DTC;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Flyosity, LLC";
+				TargetAttributes = {
+					DFEE127F19987D0800615011 = {
+						TestTargetID = DFEE126419987D0800615011;
+					};
+				};
+			};
+			buildConfigurationList = DFEE126019987D0800615011 /* Build configuration list for PBXProject "Bouncy test" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DFEE125C19987D0800615011;
+			productRefGroup = DFEE126619987D0800615011 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DFEE126419987D0800615011 /* Bouncy test */,
+				DFEE127F19987D0800615011 /* Bouncy testTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DFEE126319987D0800615011 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFEE127319987D0800615011 /* InfoPlist.strings in Resources */,
+				DFEE127B19987D0800615011 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFEE127E19987D0800615011 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFEE128C19987D0800615011 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DFEE126119987D0800615011 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFEE129C19987D3600615011 /* NSValue+JNWAdditions.m in Sources */,
+				DFEE12A219987E5A00615011 /* UIColor+Hex.m in Sources */,
+				DFEE127919987D0800615011 /* DTCAppDelegate.m in Sources */,
+				DFEE129F19987D4900615011 /* DTCViewController.m in Sources */,
+				DFEE129B19987D3600615011 /* JNWSpringAnimation.m in Sources */,
+				DFEE127519987D0800615011 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFEE127C19987D0800615011 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFEE128E19987D0800615011 /* Bouncy_testTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DFEE128619987D0800615011 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DFEE126419987D0800615011 /* Bouncy test */;
+			targetProxy = DFEE128519987D0800615011 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DFEE127119987D0800615011 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DFEE127219987D0800615011 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DFEE128A19987D0800615011 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DFEE128B19987D0800615011 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DFEE128F19987D0800615011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DFEE129019987D0800615011 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DFEE129219987D0800615011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Bouncy test/Bouncy test-Prefix.pch";
+				INFOPLIST_FILE = "Bouncy test/Bouncy test-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DFEE129319987D0800615011 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Bouncy test/Bouncy test-Prefix.pch";
+				INFOPLIST_FILE = "Bouncy test/Bouncy test-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		DFEE129519987D0800615011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Bouncy test.app/Bouncy test";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Bouncy test/Bouncy test-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Bouncy testTests/Bouncy testTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		DFEE129619987D0800615011 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Bouncy test.app/Bouncy test";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Bouncy test/Bouncy test-Prefix.pch";
+				INFOPLIST_FILE = "Bouncy testTests/Bouncy testTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DFEE126019987D0800615011 /* Build configuration list for PBXProject "Bouncy test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFEE128F19987D0800615011 /* Debug */,
+				DFEE129019987D0800615011 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DFEE129119987D0800615011 /* Build configuration list for PBXNativeTarget "Bouncy test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFEE129219987D0800615011 /* Debug */,
+				DFEE129319987D0800615011 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DFEE129419987D0800615011 /* Build configuration list for PBXNativeTarget "Bouncy testTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFEE129519987D0800615011 /* Debug */,
+				DFEE129619987D0800615011 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DFEE125D19987D0800615011 /* Project object */;
+}

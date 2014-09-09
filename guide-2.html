@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Designing &amp; Building Wonderful iOS Animations</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="author" content="Mike Rundle" />
+	<link rel="stylesheet" href="guide.css" />
+	<script src="common/common.js"></script>
+</head>
+<body>
+	<div id="wrapper">
+
+	<header>
+		<h1>Motion Design for iOS<small>Section 2</small><em>By Mike Rundle</em></h1>
+	</header>
+
+	<section>
+
+		<h2>Animation Properties</h2>
+
+		<p>Looking back at the animations shown in the previous section, how did someone go from a blank canvas or whiteboard and arrive at a complete, beautiful animation? How were these animations actually produced? What are the particular attributes and properties that are being changed from one value to another? It’s not enough to wave your hands around in the air in a meeting to indicate something should move or zoom in and out: if you want to get animations out of your head and onto the screen you’re going to have to think critically about exactly what is happening at each step and what values are being manipulated.</p>
+
+		<p>If you take a look at the animated GIFs posted in the previous section, and the variety of animations posted at sites like <a href="http://capptivate.co/">CAPPTIVATE.co</a> and others, and you look really, really closely and carefully at what’s happening, you’ll start to see some patterns emerge from all the whizzing and whirring of the visuals. Those patterns are the specific properties that designers and developers change over and over again in their animations, and guess what? There really aren’t that many of them. In fact I’d argue you could build an entire app chock full of world-class animations if you simply manipulated the following 3 properties:</p>
+
+		<ol>
+			<li><strong>Position:</strong> The precise X and Y coordinates of an item on the screen.</li>
+			<li><strong>Opacity:</strong> The alpha transparency of an item, from 0.0 (invisible) to 1.0.</li>
+			<li><strong>Scale:</strong> The size of an item relative to its initial size. A scale of 1.0 means the item is set to its initial dimensions of height and width. A scale of 0.5 means the item is half as wide and half as tall. A scale of 0.0 means the item has a 0 width and 0 height, but still exists on the screen at a particular set of coordinates. And a scale of 2.0 means an item is double its initial height and width.</li>
+		</ol>
+
+		<p>These three properties are the go-to animatable values for people designing animations for iOS apps. You can accomplish an incredible number of stunning animations by simply using these properties either on their own or in conjunction with one another.</p>
+
+		<p>So with these 3 properties of position, opacity and scale, what can you do? What exactly do manipulating these properties allow you to accomplish on the screen?</p>
+
+		<p><strong>Position.</strong> If you want to move an object around the screen you’re just manipulating its position. Moving an object down the screen means you’re increasing its Y position because (X:0, Y:0) is the top left of the screen in iOS apps. If you want to move an object from off the bottom of the screen to the center, you first need to set its Y coordinate to be larger than the vertical screen resolution (off the screen) and then animate the Y coordinate to a lower number to put it into the center of the screen.</p>
+
+		<figure>
+			<img src="images/xy.gif" />
+		</figure>
+
+		<p><strong>Opacity.</strong> Changing an interface element from 100% opaque to something more transparent means you’re adjusting its opacity, or its alpha value. Animating a change in an object’s opacity might be the most common property to animate as it makes a nice transition from blending into the background to standing out in the foreground at 100% opacity. And if you’re slowly removing something from the screen, it’s tough to go wrong with a fade animation that animates the alpha down to 0. Typically you’ll see an opacity animation coupled with an animation of a different property at the same time, for example, moving something from off the screen to on the screen (position) while animating its opacity from 0.0 (transparent) to 1.0 (opaque).</p>
+
+		<figure>
+			<img src="images/alpha.gif" />
+		</figure>
+
+		<p><strong>Scale.</strong> If you want to make an object larger or smaller (in both dimensions at once to keep it proportional, or only one dimension at a time) there’s a simple property you can adjust and that’s the object’s scale. Want to create a modal alert that looks like a native iOS 7 alert view? That’s a pretty simple animation that relies on a scale change for its visual effect. Start the scale around 1.3x (larger than the original size) and animate its scale down to 1.0x (original size) and opacity (start at 0 and animate to 1.0) and that’s all there is to it.</p>
+
+		<figure>
+			<img src="images/scale.gif" />
+		</figure>
+
+		<p>Now that we’ve described three properties that get a lot of use when designing animations, let’s go back to some animation examples I showed before and break down exactly where they’re using position, opacity and scale animations to create their visual effect.</p>
+
+		<figure>
+			<img class="full" src="images/map.gif" />
+			<figcaption>Animation by <a href="https://dribbble.com/brdrck">Jeff Broderick.</a></figcaption>
+		</figure>
+
+		<p>In Jeff’s map animation, he’s using a combination of position, opacity and scale animations all at the same time.</p>
+
+		<ul>
+			<li>The initial panel is scaled down slightly and its opacity has been reduced so it fades nicely into the black application background.</li>
+			<li>The map panel starts off at a scale larger than 1.0x (maybe 1.1x or so) and 0.0 opacity. It is then animated down to a 1.0x scale and up to 1.0 opacity. It also has a slight position animation to move it up a few dozen pixels.</li>
+		</ul>
+
+		<figure>
+			<img class="full" src="images/iwatch.gif" />
+			<figcaption>Animation by <a href="https://dribbble.com/bogner">Thomas Bogner</a></figcaption>
+		</figure>
+
+		<p>Remember this watch interface and how slick the motions looked? Well there’s really no secrets here, the only property that this designer is animating is the element’s position. There are no scale or opacity adjustments, elements are just moving on and off the screen via a change in their position. The timing of each animation is slightly staggered behind the previous element’s start time to give that “tugged” feeling, but the only property being animated is position.</p>
+
+		<p>Animating an item’s position, opacity and scale will take you pretty far but of course there are other properties that you can manipulate during your animations. Here are three more often-animated item properties that are typically involved in more advanced animations.</p>
+
+		<p><strong>Color.</strong> Just like in CSS animations, you can transition a color from one value to another. This could be the color of some text or the background color of a shape or panel in your interface. You could transition from one color to another on tap, or while introducing a new screen to the user. Or maybe slowly shift between one color and another as a user slides through a first-time use experience.</p>
+
+		<figure>
+			<img src="images/color.gif" />
+		</figure>
+
+		<p><strong>Rotation.</strong> Objects in your interface can be rotated, starting from an initial rotation state of 0&deg; to 360&deg; which is fully rotated and back to 0&deg;. Rotations are usually expressed in radians (0 &ndash; 2&pi;) when you’re building an animation in code. Slight rotation animations can add a really neat element of interest to an otherwise mundane piece of motion, especially when coupled with spring animation curves which will be discussed later in this guide.</p>
+
+		<figure>
+			<img src="images/rotate.gif" />
+		</figure>
+
+		<p><strong>3D.</strong> Transforming an object in your interface in 3D means manipulating it in the third dimension, and often when you use a 3D transform in an animation, it’s either a 3D rotation back into the screen or out towards the user. This rotation amount is also expressed in radians just like a rotation in the 2D plane, but another key factor of 3D animations is how much sense of perspective you want to use. By changing the perspective value, you’re essentially describing how far away the element will be placed visually from the front of the screen. This will determine the <em>amount</em> of warping that will take place during a 3D transform.</p>
+
+		<figure>
+			<img src="images/3D.gif" />
+		</figure>
+		
+		<p>An example of a subtle 3D effect is the pinch animation in <a href="http://realmacsoftware.com/clear">Clear</a>. The visual effect is that the task item row is visually split in half, with each half rotating backwards into the screen (in 3D space). The amount of rotation and the position of the top and bottom half of the row is carefully controlled so that there’s no gap in the middle to ruin the effect. Also, to make it truly look like a three dimensional object, the top half of the row is darker than the bottom half to indicate a shadow is being cast. This is a similar effect to the flip-up animation in Paper: the story unfolds using a 3D transform to appear to be rotating outwards towards the user as it opens and unfolds.</p>
+
+		<figure>
+			<img src="images/clear.png" />
+			<figcaption>Pinch apart interaction in Clear.</figcaption>
+		</figure>
+
+		<h2>Planning Animations</h2>
+
+		<p>If an animation was a house, you are now at least mildly familiar with what the tools of homebuilding are: hammers, wrenches and screwdrivers. You’re familiar with the tools of animation, that is, what the specific properties are that you will typically manipulate to create an animation. But that’s not all you need to know to start thinking about animations and designing motion.</p>
+
+		<p>Now it’s time to start laying the blueprints of an animation. These are the instructions that describe exactly what will happen, at what step in the animation sequence. Like I mentioned before, you can’t just wave your arms around in a meeting to explain what will happen when a user taps on a button, you need a language to describe and break down what’s happening in your head when you envision an interface element in motion. Before you can build anything, your next step should be to think about it from a granular level and write down some details about each part of the animation. It’s the plan for the animation.</p>
+
+		<p>For each element being animated, I like to think through the following before I start writing any code.</p>
+
+		<ol>
+			<li><strong>What are the initial properties of the item?</strong> Is it just off the bottom of the screen? Is it completely transparent? Is it scaled down to a microscopic size? Is it gigantic?</li>
+			<li><strong>What are the final properties of the item?</strong> Is the item now in the middle of the screen? Is it now fully visible to the user? Has it been rotated to a particular angle? Does it now have a different background color?</li>
+			<li><strong>How long should the animation take?</strong> Knowing the exact timing of an animation at this early stage is difficult so I like to think of timing in terms of the length of time it takes me to snap my fingers. One snap? Three snaps? Five snaps because it’s going to be bouncing a bunch before it’s done moving?</li>
+			<li><strong>What’s happening while this item is animating?</strong> Often you’ll be animating multiple things simultaneously, one just a staggered amount of time after another. It’s important to think about these secondary animations as part of the whole.</li>
+			<li><strong>What will happen once this item is done animating?</strong> After you animate it off the screen should it be removed? Or perhaps 3 snaps after it’s done animating you want to animate it out in a different direction? Or maybe after this is complete, a different item will begin its own animation?</li>
+		</ol>
+
+		<p>Organizing your thoughts like this is helpful in a few ways. First, it forces you to move from an abstract conceptual modal of your animation down to something concrete that you can describe to someone else. Second, it’s at this stage that you’ll probably realize your grand vision of the animation has a few unanswered questions that need to be addressed. <em>Does Item 2 start animating at the same time as Item 1, or does it have a slightly staggered start time? And how staggered of a start time should I use? Exactly how far do I need to move Item 3 for it to line up nicely with Item 4? How large should Item 5 be before I start animating it back down to a 1.0 scale? Should I fade Item 6 out or just reduce its scale down to 0?</em> You probably won’t have the answers to these questions at this point, but you will soon once you start building and playing with your animation.</p>
+
+		<h2>Just Like In Life, Timing Is Everything</h2>
+
+		<p>There’s one key component in animation that I haven’t mentioned yet, but it’s actually the most important piece of the puzzle when trying to build wonderful, natural animations. <em>Time.</em> The time between an action taking place and the animation starting. The time that an animation takes to complete. The time between one animation starting and another secondary animation kicking off.</p>
+
+		<p>And, of course, how your animated item’s properties will change over time, which is the essence of animation.</p>
+
+		<p>The easiest way to visualize the timing of an illustration and its effect on the property changing over time is a graph like the following.</p>
+
+		<figure>
+			<img src="images/linear.gif" />
+			<figcaption>The timing curve for a <strong>linear animation.</strong></figcaption>
+		</figure>
+
+		<p><em>This graph represents an animation.</em> The vertical axis represents the value of the property you’re animating, in this case an item’s scale. For this animation, we’re starting the scale value at 0.0 (invisible to the user) and ending the scale value at 1.0 (the original size of the element.)</p>
+
+		<p>The horizontal axis represents the time from the start of the animation (0 seconds elapsed) to the completion of your animation, in this case, a 1 second animation duration. The green line indicates exactly what the property’s value will be at a specific point in time. As you can see, the green line is completely straight, which means that <em>rate</em> at which the value is changing with respect to time is constant. For this animation, the scale value is changing from 0.0 to 1 over the course of 1 second with no variation in the rate of the change.</p>
+
+		<p>This particular timing curve is illustrating a <strong>linear animation</strong>, and this is what a 1 second linear animation of an object from scale 0 to scale 1 looks like, looped continuously.</p>
+
+		<figure>
+			<div class="linear-animation-example">Linear Ball</div>
+			<figcaption>Make sure you’re using a newer browser to see the animation above.</figcaption>
+		</figure>
+
+		<p>The ball’s scale is growing continuously in lock-step with the time because the animation has a <em>linear timing curve</em>. Why call it a curve since it’s a straight line? Because you’ll rarely want an animation to have a linear timing, and most animation timing graphs do end up looking like curves. These next four graphs represent some classic animation timings.</p>
+
+		<figure>
+			<img src="images/easing.png" />
+			<figcaption>From the wonderful resource <a href="http://easings.net/">Easings.net</a>.</figcaption>
+		</figure>
+
+		<p>The vertical axis represents the value of the property you’re animating, like an item’s scale or position (as discussed in the graph above.) The bottom of the vertical axis is the starting value of that property, say, a Y position of 0, and then the top of the vertical axis is the ending value of that property, say, a Y position of 100. The horizontal axis represents time from the start to the completion of your animation with the length of the axis being the total duration of the animation. The line indicates exactly what the property’s value will be at a specific point in time.</p>
+
+		<p>What does a curved animation timing look like? Here’s the same ball from up above, animated with a 1 second duration, but this time, we’re going to put it next to another ball that is animating with an “ease in, ease out” curve for its timing. See if you can notice a difference.</p>
+
+		<figure>
+			<div class="linear-animation-example">Linear Ball</div>
+			<div class="easing-animation-example">Ease In Out Ball</div>
+		</figure>
+
+		<p>Here’s approximately what the timing curve for the green ball looks like.</p>
+
+		<figure>
+			<img src="images/easeinout.gif" />
+		</figure>
+
+		<p>An “ease in, ease out” curve, or “ease-in-out” as it’s typically called, is different in a number of ways from a linear timing curve. First, it’s actually a curve vs. a straight line, so at .25 seconds the scale is not exactly .25 since the rate at which the values are changing is not constant. Second, and most noticeably, it produces a different animation motion, one where it’s slow to start out its motion (like it’s lagging behind a bit) and then slow to end (as if it gets to near the final scale and then slowly limps to the last value.)</p>
+
+		<p>A linear animation curve means that your property’s value is changing in lock-step with time ticking away vs. the various easing graphs which indicate that a property’s value is either slow to start changing, slow to finish changing, or both.</p>
+
+		<p>Now let’s add in a third ball animation next to the two we already have. The motion of this third ball, the red one, is one where the motion starts out quickly but then gradually, ever-so-slowly, comes to a complete stop at the final value. This is an example of “ease out” motion.</p>
+
+		<figure>
+			<div class="linear-animation-example">Linear Ball</div>
+			<div class="easing-animation-example">Ease In Out Ball</div>
+			<div class="easeout-animation-example">Ease Out Ball</div>
+		</figure>
+
+		<p>Here’s what the timing curve of the red ball’s ease out motion looks like.</p>
+
+		<figure>
+			<img src="images/easeout.gif" />
+		</figure>
+
+		<p>A good way to visualize this type of easing curve is to think about when a waiter at a restaurant brings you your plate of food. They don’t just place it quickly and suddenly in front of you, they let the plate slow down and come to a rest gradually on the table.</p>
+
+		<p>The last of the more traditional timing curve is an “ease in” motion which means it’s very, very slow to start its animation and then finishes up quickly. The blue ball added below has this “ease in” timing curve.</p>
+
+		<figure>
+			<div class="linear-animation-example">Linear Ball</div>
+			<div class="easing-animation-example">Ease In Out Ball</div>
+			<div class="easeout-animation-example">Ease Out Ball</div>
+			<div class="easein-animation-example">Ease In Ball</div>
+		</figure>
+
+		<p>And this is approximately what the blue ball’s animation curve looks like.</p>
+
+		<figure>
+			<img src="images/easein.gif" />
+		</figure>
+
+		<p>Looking at this “ease in” animation curve, you can see that at .5 seconds (half-way through the animation) the scale value is barely at 1/4 of the way to the final value. That’s what creates the feel of it being really sluggish and slow to start animating, and then it races to the final value in the final split second.</p>
+
+		<p>Linear, ease-in-out, ease-out, and ease-in animation curves are the 4 built-in timing choices that most interface systems provide by default, for example, these are the timing curves provided by default for use in CSS3 animations. They’re also the four default animation timings provided by Core Animation, the animation framework of iOS.</p>
+
+		<p>Easing curves like the kind provided by Core Animation and CSS3 are defined mathematically as <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve">Bézier curves</a> like the kind you draw in Sketch, Illustrator or other vector-based drawing tools. To define the type of Bézier curve used in animation easing, you choose the location of the handles of the curve. The specific type of curve used in Core Animation and CSS3 for executing an easing animation is a <em>cubic</em> Bézier curve, meaning there are four control points to define.</p>
+
+		<figure>
+			<img src="images/cubic.gif" />
+			<figcaption>How moving the control points affect the shape of the curve. From <a href="http://cubic-bezier.com">Cubic-Bezier</a>.</figcaption>
+		</figure>
+
+		<p>In the next section we’re going to start learning the real magic behind beautiful animations, and that’s creating natural-feeling motion.</p>
+
+		<a class="next-section" href="guide-3.html">CONTINUE</a>
+
+	</section>
+
+	</div>
+</body>
+</html>
